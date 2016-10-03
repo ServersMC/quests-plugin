@@ -1,0 +1,4 @@
+name: Quests
+version: 1.0
+author: DennisLysenko
+main: org.serversmc.quests.core.Main
