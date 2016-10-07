@@ -52,7 +52,6 @@ public class TestQuest extends Quest implements Listener {
 		Player player = (Player) killer;
 		if (memory.containsKey(player)) {
 			memory.replace(player, memory.get(player) + 1);
-			System.out.println(memory.get(player));
 			if (memory.get(player) == 15) {
 				player.sendMessage(ChatColor.GREEN + "Thanks man! Here's your $150!");
 				memory.remove(player);
