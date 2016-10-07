@@ -28,7 +28,10 @@ public class PlayerUtils {
 
 			String line;
 			while ((line = reader.readLine()) != null) {
-				String[] vars = line.split(line, 2);
+				if (line.isEmpty()) {
+					continue;
+				}
+				String[] vars = line.split(":", 2);
 				Quest quest = Quest.getQuestByName(vars[0]);
 				quest.loadMemory(player, vars[1]);
 			}
