@@ -36,7 +36,7 @@ public abstract class Quest implements Listener {
 	}
 	
 	public void preInit(Player player) {
-		
+		init(player);
 	}
 	
 	public abstract void init(Player player);
