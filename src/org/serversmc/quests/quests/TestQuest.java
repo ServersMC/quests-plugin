@@ -1,5 +1,6 @@
 package org.serversmc.quests.quests;
 
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,16 +38,6 @@ public class TestQuest extends Quest implements Listener {
 		}
 	}
 
-	@Override
-	public boolean isRepeatable() {
-		return false;
-	}
-
-	@Override
-	public List<Quest> getRequirments() {
-		return new ArrayList<Quest>();
-	}
-
 	@EventHandler
 	public void onEntityDeathEvent(EntityDeathEvent event) {
 		Entity death = event.getEntity();
@@ -71,6 +62,27 @@ public class TestQuest extends Quest implements Listener {
 				}
 			}
 		}
+	}
+
+	@Override
+	public boolean isRepeatable() {
+		return false;
+	}
+	
+	@Override
+	public List<Quest> getRequirments() {
+		return new ArrayList<Quest>();
+	}
+
+	@Override
+	public void loadMemory(Player player, String s) {
+		memory.put(player, Integer.parseInt(s));
+	}
+	
+	@Override
+	public void saveMemory(Player player, PrintWriter writer) {
+		writer.println(memory.get(player));
+		memory.remove(player);
 	}
 
 }

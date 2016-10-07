@@ -1,5 +1,6 @@
 package org.serversmc.quests.types;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.serversmc.quests.core.Main;
+import org.serversmc.quests.enums.EQuest;
 
 public abstract class Quest implements Listener {
 	
@@ -15,10 +17,10 @@ public abstract class Quest implements Listener {
 	
 	public static List<Quest> quests = new ArrayList<Quest>();
 	
-	public static Quest getQuestById(Integer id) {
-		for (Quest quest : quests) {
-			if (quest.id.equals(id)) {
-				return quest;
+	public static Quest getQuestByName(String name) {
+		for (EQuest equest : EQuest.values()) {
+			if (equest.name().equalsIgnoreCase(name)) {
+				return equest.quest;
 			}
 		}
 		return null;
@@ -26,11 +28,9 @@ public abstract class Quest implements Listener {
 	
 	// OBJECT //
 
-	public Integer id;
 	public Location location;
 	
 	public Quest() {
-		id = quests.size();
 		Quest.quests.add(this);
 		Bukkit.getPluginManager().registerEvents(this, Main.plugin);
 	}
@@ -42,5 +42,7 @@ public abstract class Quest implements Listener {
 	public abstract void init(Player player);
 	public abstract boolean isRepeatable();
 	public abstract List<Quest> getRequirments();
+	public abstract void loadMemory(Player player, String s);
+	public abstract void saveMemory(Player player, PrintWriter writer);
 	
 }
