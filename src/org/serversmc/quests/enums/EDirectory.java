@@ -3,7 +3,7 @@ package org.serversmc.quests.enums;
 public enum EDirectory {
 
 	DATAFOLDER("plugins/Quests/"),
-	PLAYERS(DATAFOLDER + "players");
+	PLAYERS(DATAFOLDER + "players/");
 	
 	private String path;
 	
