@@ -45,6 +45,9 @@ public class PlayerUtils {
 			PrintWriter writer = new PrintWriter(file);
 			
 			for (EQuest quest : EQuest.values()) {
+				if (!quest.quest.hasMemory(player)) {
+					continue;
+				}
 				writer.print(quest.name() + ":");
 				quest.quest.saveMemory(player, writer);
 			}

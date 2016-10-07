@@ -42,6 +42,7 @@ public abstract class Quest implements Listener {
 	public abstract void init(Player player);
 	public abstract boolean isRepeatable();
 	public abstract List<Quest> getRequirments();
+	public abstract boolean hasMemory(Player player);
 	public abstract void loadMemory(Player player, String s);
 	public abstract void saveMemory(Player player, PrintWriter writer);
 	

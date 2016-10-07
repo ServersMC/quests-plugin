@@ -75,6 +75,11 @@ public class TestQuest extends Quest implements Listener {
 	}
 
 	@Override
+	public boolean hasMemory(Player player) {
+		return memory.containsKey(player);
+	}
+
+	@Override
 	public void loadMemory(Player player, String s) {
 		memory.put(player, Integer.parseInt(s));
 	}
