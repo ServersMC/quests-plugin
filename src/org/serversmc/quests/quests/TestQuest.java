@@ -1,7 +1,9 @@
 package org.serversmc.quests.quests;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -12,7 +14,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.serversmc.quests.types.Quest;
-import com.earth2me.essentials.api.*;
+
+import com.earth2me.essentials.api.Economy;
+import com.earth2me.essentials.api.NoLoanPermittedException;
+import com.earth2me.essentials.api.UserDoesNotExistException;
 
 public class TestQuest extends Quest implements Listener {
 
@@ -27,10 +32,19 @@ public class TestQuest extends Quest implements Listener {
 		if (memory.containsKey(player)) {
 			player.sendMessage(ChatColor.RED + "You have already started this quest!");
 		} else {
-			player.sendMessage(
-					ChatColor.GREEN + "If you can collect kill 15 mobs for me, I'll give you a reward of $150.00!");
+			player.sendMessage(ChatColor.GREEN + "If you can kill 15 mobs for me, I'll give you a reward of $150.00!");
 			memory.put(player, 0);
 		}
+	}
+
+	@Override
+	public boolean isRepeatable() {
+		return false;
+	}
+
+	@Override
+	public List<Quest> getRequirments() {
+		return new ArrayList<Quest>();
 	}
 
 	@EventHandler
@@ -47,7 +61,7 @@ public class TestQuest extends Quest implements Listener {
 		if (memory.containsKey(player)) {
 			memory.replace(player, memory.get(player) + 1);
 			System.out.println(memory.get(player));
-			if (memory.get(player) == 3) {
+			if (memory.get(player) == 15) {
 				player.sendMessage(ChatColor.GREEN + "Thanks man! Here's your $150!");
 				memory.remove(player);
 				try {

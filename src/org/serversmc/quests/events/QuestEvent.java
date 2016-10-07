@@ -20,7 +20,7 @@ public class QuestEvent implements Listener {
 		
 		for (Quest quest : Quest.quests) {
 			if (location.distance(quest.location) == 0) {
-				quest.init(player);
+				quest.preInit(player);
 			}
 		}
 	}
