@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.serversmc.quests.core.Main;
 import org.serversmc.quests.enums.EQuest;
+import org.serversmc.quests.utils.PlayerUtils;
 
 public abstract class Quest implements Listener {
 	
@@ -36,7 +38,23 @@ public abstract class Quest implements Listener {
 	}
 	
 	public void preInit(Player player) {
-		init(player);
+		for (Quest quest : getRequirments()) {
+			if (!PlayerUtils.hasCompleted(player, quest)) {
+				player.sendMessage(ChatColor.RED + "You have not unlocked this quest yet!");
+				return;
+			}
+		}
+		if (PlayerUtils.hasCompleted(player, this)) {
+			if (isRepeatable()) {
+				init(player);
+			}
+			else {
+				player.sendMessage(ChatColor.RED + "You have alreay completed this Quest!");
+			}
+		}
+		else {
+			init(player);
+		}
 	}
 	
 	public abstract void init(Player player);

@@ -15,6 +15,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.serversmc.quests.types.Quest;
+import org.serversmc.quests.utils.PlayerUtils;
 
 import com.earth2me.essentials.api.Economy;
 import com.earth2me.essentials.api.NoLoanPermittedException;
@@ -55,6 +56,7 @@ public class TestQuest extends Quest implements Listener {
 			if (memory.get(player) == 15) {
 				player.sendMessage(ChatColor.GREEN + "Thanks man! Here's your $150!");
 				memory.remove(player);
+				PlayerUtils.addCompleted(player, this);
 				try {
 					Economy.add(player.getName(), BigDecimal.valueOf(150d));
 				} catch (NoLoanPermittedException | UserDoesNotExistException e) {
@@ -66,7 +68,7 @@ public class TestQuest extends Quest implements Listener {
 
 	@Override
 	public boolean isRepeatable() {
-		return false;
+		return true;
 	}
 	
 	@Override

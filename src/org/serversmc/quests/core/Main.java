@@ -24,7 +24,7 @@ public class Main extends JavaPlugin {
 		EQuest.values();
 		setupFiles();
 		
-		reloadMemory();
+		loadMemory();
 		
 		Console.info("Enabled!");
 	}
@@ -35,14 +35,21 @@ public class Main extends JavaPlugin {
 		}
 	}
 	
-	public void reloadMemory() {
+	public void loadMemory() {
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			PlayerUtils.loadPlayer(player);
 		}
 	}
 	
+	public void saveMemory() {
+		for (Player player : Bukkit.getOnlinePlayers()) {
+			PlayerUtils.savePlayer(player);
+		}
+	}
+	
 	@Override
 	public void onDisable() {
+		saveMemory();
 		Console.info("Disabled!");
 	}
 	

@@ -13,4 +13,13 @@ public enum EQuest {
 		this.quest = quest;
 	}
 	
+	public static EQuest parse(Quest quest) {
+		for (EQuest equest : values()) {
+			if (equest.quest.equals(quest)) {
+				return equest;
+			}
+		}
+		return null;
+	}
+	
 }
