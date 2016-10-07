@@ -3,10 +3,9 @@ package org.serversmc.quests.types;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.serversmc.quests.core.Main;
 
 public abstract class Quest implements Listener {
 	
@@ -25,15 +24,13 @@ public abstract class Quest implements Listener {
 	
 	// OBJECT //
 
-	{
-		quests.add(this);
-		Bukkit.getPluginManager().registerEvents(this, Main.plugin);
+	public Quest() {
+		Quest.quests.add(this);
 	}
 	
 	public Integer id;
-	public Location loc;
+	public Location location;
 	
-	public abstract void init();
-	public abstract void update();
+	public abstract void init(Player player);
 	
 }

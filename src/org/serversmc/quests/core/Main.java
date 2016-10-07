@@ -1,6 +1,9 @@
 package org.serversmc.quests.core;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.serversmc.quests.enums.EQuests;
+import org.serversmc.quests.events.QuestEvent;
 import org.serversmc.quests.utils.Console;
 
 public class Main extends JavaPlugin {
@@ -10,12 +13,14 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		plugin = this;
-		Console.info("enabled!");
+		Console.info("Enabled!");
+		Bukkit.getPluginManager().registerEvents(new QuestEvent(), this);
+		EQuests.values();
 	}
 	
 	@Override
 	public void onDisable() {
-		Console.info("disabled!");
+		Console.info("Eisabled!");
 	}
 	
 }
